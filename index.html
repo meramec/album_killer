@@ -5,12 +5,13 @@
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <style>
       body{ font-family: 'Open Sans'; }
-      a { text-decoration: none; color: black; }
+      a { text-decoration: none; color: darkolivegreen; }
+      a:hover { color: green; }
       .title{ font-size: 2.2em; font-weight: bold; padding: 20px; }
-      .content{ width: 100%; padding: 20px; }
-      .list{ font-size: 1.6em; width: 45%; }
-      .list .link{ font-size: 0.8em; color: gray; background-color: #eee; cursor: pointer; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
-      .list .link:hover{ color: black; background-color: #ddd }
+      .content{ width: 100%; padding: 20px; box-sizing: border-box; }
+      .list{ font-size: 1.6em; width: 100%; }
+      .list .item{ font-size: 0.8em; color: gray; background-color: #eee; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
+      .code{ font-family: monospace; word-wrap: break-word; }
     </style>
   </head>
   <body>
@@ -18,7 +19,41 @@
       Album Killer
     </div>
     <div class='content'>
-      A browser bookmark that automates deletion of all Facebook albums in a group.
+      <div class='list'>
+        A browser bookmark that automates deletion of all Facebook albums in a group.
+        <div class='item'>
+          <p>
+            It turns out that Facebook does not allow an application to delete photos it did not create. While this is okay for a single user's albums--so
+            long as he or she uses the same application to create and delete--it does not work for multi-user albums.
+          </p>
+          <p>
+            As a (hopefully) short-term workaround, I created this script to be run as a bookmarklet when viewing the Facebook albums in question.
+          </p>
+          <p></p>
+        </div>
+        <div class='item'>
+          Direct links to
+          <a href='albumkiller.js'>albumkiller.js</a>
+          and
+          <a href='albumkiller-min.js'>albumkiller-min.js</a>
+        </div>
+        <div class='item'>
+          <div class='code'></div>
+        </div>
+      </div>
     </div>
+    <script>
+      (function() {
+        var code;
+      
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            code = this.response;
+            document.querySelector('.code').appendChild(document.createTextNode(code));
+          }
+        };
+      })();
+    </script>
   </body>
 </html>

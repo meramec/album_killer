@@ -7,16 +7,55 @@
 
     :css 
       body{ font-family: 'Open Sans'; }
-      a { text-decoration: none; color: black; }
+      a { text-decoration: none; color: darkolivegreen; }
+      a:hover { color: green; }
       .title{ font-size: 2.2em; font-weight: bold; padding: 20px; }
-      .content{ width: 100%; padding: 20px; }
-      .list{ font-size: 1.6em; width: 45%; }
-      .list .link{ font-size: 0.8em; color: gray; background-color: #eee; cursor: pointer; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
-      .list .link:hover{ color: black; background-color: #ddd }
+      .content{ width: 100%; padding: 20px; box-sizing: border-box; }
+      .list{ font-size: 1.6em; width: 100%; }
+      .list .item{ font-size: 0.8em; color: gray; background-color: #eee; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
+      .code{ font-family: monospace; word-wrap: break-word; }
 
   %body
     .title 
       Album Killer
 
     .content
-      A browser bookmark that automates deletion of all Facebook albums in a group.
+      .list
+        A browser bookmark that automates deletion of all Facebook albums in a group.
+
+        .item
+          %p
+            It turns out that Facebook does not allow an application to delete photos it did not create. While this is okay for a single user's albums--so
+            long as he or she uses the same application to create and delete--it does not work for multi-user albums.
+          %p
+            As a (hopefully) short-term workaround, I created this script to be run as a bookmarklet when viewing the Facebook albums in question.
+          %p
+
+        .item
+          Direct links to
+          %a{href: 'albumkiller.js'} albumkiller.js
+          and
+          %a{href: 'albumkiller-min.js'} albumkiller-min.js
+
+        .item
+          .code
+
+
+    :javascript
+      (function() {
+        var code;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            code = this.response;
+            document.querySelector('.code').appendChild(document.createTextNode(code));
+          }
+        };
+      })();
+
+
+
+
+
+
