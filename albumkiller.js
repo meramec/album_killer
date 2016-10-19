@@ -205,14 +205,13 @@
 
         function clickDeleteButton() {
           var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
-          console.log("Click delete", deleteButton);
           if(deleteButton) {
             setTimeout(function() {
               deleteButton.click();
               confirmDelete();
             }, 100);
           } else {
-            setTimeout(clickDeleteButton, 100);
+            setTimeout(clickDeleteButton, 250);
           }
         }
 
