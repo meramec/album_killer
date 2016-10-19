@@ -187,6 +187,13 @@
     function remove(i) {
       var album = albums[i];
 
+      if(! album) {
+        if(win) {
+          win.close();
+        }
+        return;
+      }
+
       if(album.remove) {
         if(win) {
           win.location.href = album.href;
