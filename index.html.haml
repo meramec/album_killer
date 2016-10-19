@@ -49,10 +49,15 @@
             Any album with a &#9988; icon will be deleted. Click albums to toggle whether or not to keep them. Then click the Remove All button.
 
         .item
-          For reference here are direct links to
-          %a{href: 'albumkiller.js'} albumkiller.js
-          and
-          %a{href: 'albumkiller-min.js'} albumkiller-min.js
+          %p
+            Always be careful when adding scripts to your browser to run as bookmarks. The script will run as you, in the context of your current
+            page. Make sure you know and trust the source of the script and are comfortable with the actions it will take. If in doubt, don't install it.
+
+          %p
+            For reference here are direct links to
+            %a{href: 'albumkiller.js'} albumkiller.js
+            and
+            %a{href: 'albumkiller-min.js'} albumkiller-min.js
 
 
     :javascript
@@ -71,9 +76,5 @@
         xhttp.open('GET', 'albumkiller-min.js', true);
         xhttp.send();
       })();
-
-
-
-
 
 
