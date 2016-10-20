@@ -107,7 +107,7 @@
 
             var button = document.querySelector('.drag-button');
             button.href = 'javascript:' + code;
-            button.addEventHandler('click', function(e) {
+            button.addEventListener('click', function(e) {
               e.preventDefault();
             });
 
