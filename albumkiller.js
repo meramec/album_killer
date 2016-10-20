@@ -20,12 +20,18 @@
   dialog.style.padding = '20px';
   dialog.style.boxSizing = 'border-box';
   dialog.style.background = 'white';
-  dialog.style.boxShadow = '1px 1px 2px 2px rgb(21, 21, 100)';
+  dialog.style.boxShadow = '1px 1px 6px 1px rgb(21, 21, 100)';
 
   var title = document.createElement('h1');
   dialog.appendChild(title);
   title.fontSize = '30px';
   title.appendChild(document.createTextNode('Album Killer'));
+
+  var home = document.createElement('a');
+  dialog.appendChild(home);
+
+  home.href = 'https://meramec.github.io/album_killer/';
+  home.appendChild(document.createTextNode('https://meramec.github.io/album_killer/'));
 
   var close = document.createElement('a');
   dialog.appendChild(close);
@@ -33,6 +39,7 @@
   close.style.borderRadius = '50%';
   close.style.width = '16px';
   close.style.height = '16px';
+  close.style.lineHeight = '16px';
   close.style.textAlign = 'center';
   close.style.display = 'block';
   close.style.position = 'absolute';
@@ -40,7 +47,7 @@
   close.style.right = '8px';
   close.style.background = 'grey';
   close.style.color = 'white';
-  close.innerHTML = '&times;';
+  close.innerHTML = '&#10006;';
 
   close.addEventListener('click', function() {
     body.removeChild(dialog);
@@ -51,6 +58,7 @@
   var list = document.createElement('ul');
   dialog.appendChild(list);
 
+  list.style.marginTop = '10px';
   list.style.height = 'calc(100% - 50px)';
   list.style.overflow = 'auto';
 

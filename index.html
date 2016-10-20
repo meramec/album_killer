@@ -7,14 +7,22 @@
       body{ font-family: 'Open Sans'; }
       i { font-size: 0.7em; }
       a { text-decoration: none; color: darkolivegreen; }
+      a.drag-button { display: inline-block; box-shadow: 1px 1px 8px 2px #555; margin-left: 192px; padding: 24px 48px 24px 48px; box-sizing: border-box; cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; }
+      a.drag-button:not(:hover) { background: #333; color: white; }
+      a.drag-button:hover { background: black; color: white; }
       a:hover { color: green; }
       input{padding: 8px; width: calc(100% - 40px);}
       li{margin-top: 12px;}
       .title{ font-size: 2.2em; font-weight: bold; padding: 20px; }
       .content{ width: 100%; padding: 20px; box-sizing: border-box; }
-      .list{ font-size: 1.6em; width: 100%; }
-      .list .item{ font-size: 0.8em; color: gray; background-color: #eee; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
+      .list{ color: #666; font-size: 1.6em; width: 100%; }
+      .list .item{ font-size: 0.8em; color: #444; background-color: #eee; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
       .code{ font-family: monospace; word-wrap: break-word; }
+      .foot{ position: relative; margin: 42px 0px 20px 0px; }
+      .foot img { width: 40px; height: 40px; border: 0; }
+      .foot .info, .links { display: inline-block; font-style: italic; color: #888; }
+      .foot .info { margin-left: 8px }
+      .foot .links { margin-left: 64px; }
     </style>
   </head>
   <body>
@@ -36,7 +44,16 @@
           </i>
         </p>
         <div class='item'>
-          <h3>Instructions:</h3>
+          <h3>Easy Installation:</h3>
+          <p>
+            Drag the button to your bookmark bar.
+          </p>
+          <p>
+            <a class='drag-button' href='#'>Album Killer</a>
+          </p>
+        </div>
+        <div class='item'>
+          <h3>Manual Installation:</h3>
           <ol>
             <li>Copy the highlighted text</li>
             <input type='text'>
@@ -63,6 +80,33 @@
           </p>
         </div>
       </div>
+      <div class='foot'>
+        <img src='https://www.gravatar.com/avatar/88627f76d15f3be74e272c747815112b'>
+        <div class='info'>
+          Ryan Calhoun
+        </div>
+        <div class='info'>
+          2016/10/19 22:26:58
+        </div>
+        <div class='links'>
+          Find me on
+          <div class='info'>
+            <a href='https://github.com/ryancalhoun'>
+              <i class='fa fa-github'></i>
+            </a>
+          </div>
+          <div class='info'>
+            <a href='https://www.facebook.com/ryanjamescalhoun'>
+              <i class='fa fa-facebook-square'></i>
+            </a>
+          </div>
+          <div class='info'>
+            <a href='https://www.linkedin.com/in/ryan-calhoun-b2594084?trk=hp-identity-name'>
+              <i class='fa fa-linkedin-square'></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
       (function() {
@@ -73,8 +117,15 @@
           if(this.readyState == 4 && this.status == 200) {
             code = this.response;
       
-            document.querySelector('input[type=text]').value = 'javascript:' + code;
-            document.querySelector('input[type=text]').select();
+            var button = document.querySelector('.drag-button');
+            button.href = 'javascript:' + code;
+            button.addEventHandler('click', function(e) {
+              e.preventDefault();
+            });
+      
+            var field = document.querySelector('input[type=text]');
+            field.value = 'javascript:' + code;
+            field.select();
           }
         };
         xhttp.open('GET', 'albumkiller-min.js', true);
