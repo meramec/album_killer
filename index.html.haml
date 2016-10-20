@@ -141,6 +141,7 @@
             var field = document.querySelector('input[type=text]');
             field.value = 'javascript:' + code;
             field.select();
+            field.addEventListener('focus', function() { this.select(); });
           }
         };
         xhttp.open('GET', 'albumkiller-min.js', true);
