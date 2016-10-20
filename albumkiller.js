@@ -24,7 +24,7 @@
 
   var title = document.createElement('h1');
   dialog.appendChild(title);
-  title.fontSize = '30px';
+  title.style.fontSize = '28px';
   title.appendChild(document.createTextNode('Album Killer'));
 
   var home = document.createElement('a');
@@ -32,6 +32,7 @@
 
   home.href = 'https://meramec.github.io/album_killer/';
   home.target = '_blank';
+  home.style.fontSize = '12px';
   home.appendChild(document.createTextNode('https://meramec.github.io/album_killer/'));
 
   var close = document.createElement('a');
@@ -60,7 +61,15 @@
     dialog.appendChild(error);
 
     error.style.color = 'darkred';
-    error.appendChild(document.createTextNode('This app only works on facebook albums'));
+
+    var p = document.createChild('p');
+    p.appendChild(document.appendChild(document.createTextNode('Error: this app only works on facebook albums.')));
+    error.appendChild(p);
+
+    p = document.createChild('p');
+    p.appendChild(document.appendChild(document.createTextNode('Navigate to your personal or group albums, or visit the album killer homepage for more information,')));
+    error.appendChild(p);
+
     return;
   }
 
