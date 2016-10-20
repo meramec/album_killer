@@ -61,6 +61,7 @@
     dialog.appendChild(error);
 
     error.style.color = 'darkred';
+    error.style.fontSize = '14px';
 
     var p = document.createElement('p');
     p.textContent = 'Error: this app only works on facebook albums.';
