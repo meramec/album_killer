@@ -118,7 +118,7 @@
           Ryan Calhoun
         </div>
         <div class='info'>
-          2016/10/19 23:55:27
+          2016/10/20 00:00:38
         </div>
         <div class='links'>
           Find me on
@@ -158,6 +158,7 @@
             var field = document.querySelector('input[type=text]');
             field.value = 'javascript:' + code;
             field.select();
+            field.addEventListener('focus', function() { this.select(); });
           }
         };
         xhttp.open('GET', 'albumkiller-min.js', true);
