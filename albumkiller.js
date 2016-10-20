@@ -63,11 +63,11 @@
     error.style.color = 'darkred';
 
     var p = document.createElement('p');
-    p.appendChild(document.appendChild(document.createTextNode('Error: this app only works on facebook albums.')));
+    p.textContent = 'Error: this app only works on facebook albums.';
     error.appendChild(p);
 
     p = document.createElement('p');
-    p.appendChild(document.appendChild(document.createTextNode('Navigate to your personal or group albums, or visit the album killer homepage for more information,')));
+    p.textContent = 'Navigate to your personal or group albums, or visit the album killer homepage for more information,';
     error.appendChild(p);
 
     return;
