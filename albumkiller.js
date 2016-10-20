@@ -191,6 +191,7 @@
         if(win) {
           win.close();
         }
+        location.reload();
         return;
       }
 
