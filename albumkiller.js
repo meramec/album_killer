@@ -31,6 +31,7 @@
   dialog.appendChild(home);
 
   home.href = 'https://meramec.github.io/album_killer/';
+  home.target = '_blank';
   home.appendChild(document.createTextNode('https://meramec.github.io/album_killer/'));
 
   var close = document.createElement('a');
@@ -47,11 +48,21 @@
   close.style.right = '8px';
   close.style.background = 'grey';
   close.style.color = 'white';
+  close.style.cursor = 'pointer';
   close.innerHTML = '&#10006;';
 
   close.addEventListener('click', function() {
     body.removeChild(dialog);
   });
+
+  if(location.host != 'www.facebook.com' && !location.search.match(/filter=albums/)) {
+    var error = document.createElement('div');
+    dialog.appendChild(error);
+
+    error.style.color = 'darkred';
+    error.appendChild(document.createTextNode('This app only works on facebook albums'));
+    return;
+  }
 
   var albums = [];
   var toRemove;
