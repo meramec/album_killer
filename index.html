@@ -18,6 +18,11 @@
       .list{ color: #666; font-size: 1.6em; width: 100%; }
       .list .item{ font-size: 0.8em; color: #444; background-color: #eee; padding: 20px; margin-top: 10px; border: solid thin lightgray; }
       .code{ font-family: monospace; word-wrap: break-word; }
+      .columns { position: relative; }
+      .column { display: inline-block; vertical-align: top; }
+      .left { width: calc(100% - 240px); }
+      .right { position: absolute; top: 0; right: 0; }
+      img.screenshot { height: 220px; box-shadow: 1px 1px 8px 1px #555; }
       .foot{ position: relative; margin: 42px 0px 20px 0px; }
       .foot img { width: 40px; height: 40px; border: 0; }
       .foot .info, .links { display: inline-block; font-style: italic; color: #888; }
@@ -31,48 +36,75 @@
     </div>
     <div class='content'>
       <div class='list'>
-        A browser bookmark that automates deletion of all Facebook albums in a group.
-        <p>
+        <div class='left'>
+          A browser bookmark that automates deletion of all Facebook albums in a group.
+        </div>
+        <p class='left'>
           <i>
             It turns out that Facebook does not allow an application to delete photos it did not create. While this is okay for a single user's albums--so
             long as he or she uses the same application to create and delete--it does not work for multi-user albums.
           </i>
         </p>
-        <p>
+        <p class='left'>
           <i>
             As a (hopefully) short-term workaround, I created this script to be run as a bookmarklet when viewing the Facebook albums in question.
           </i>
         </p>
         <div class='item'>
-          <h3>Easy Installation:</h3>
-          <p>
-            Drag the button to your bookmark bar.
-          </p>
-          <p>
-            <a class='drag-button' href='#'>Album Killer</a>
-          </p>
+          <div class='columns'>
+            <div class='column left'>
+              <h3>How it works</h3>
+              <p>
+                This app is called a bookmarklet. It is a small piece of Javascript that is saved into your browser's bookmark bar.
+                Once installed, it runs when you click its bookmark button.
+              </p>
+              <p>
+                When viewing your list of Facebook albums to delete (personal or group albums), start the app and wait until it finds
+                all the albums. It will actually page back and forth through your albums to read their names.
+              </p>
+              <p>
+                Any album with a &#9988; icon will be deleted. Click albums to toggle whether or not to keep them. Then click the
+                Remove All button.
+              </p>
+              <p>
+                While the script is running, albums will be opened in a new window, and the delete buttons clicked for each. It is important
+                to leave the browser running in the foreground. Using the browser for anything else may cause the app to stall. If this
+                happens, just refresh your Facebook albums view and relaunch the app to finish the job.
+              </p>
+            </div>
+            <div class='column right'>
+              <a href='screenshot.jpg'>
+                <img class='screenshot' src='screenshot.jpg'>
+              </a>
+            </div>
+          </div>
         </div>
         <div class='item'>
-          <h3>Manual Installation:</h3>
+          <div class='columns'>
+            <h3 class='left'>Easy Installation</h3>
+            <p class='left'>
+              Drag the button on the right to your bookmark bar.
+            </p>
+            <div class='right'>
+              <a class='drag-button'>Album Killer</a>
+            </div>
+          </div>
+        </div>
+        <div class='item'>
+          <h3>Manual Installation</h3>
           <ol>
             <li>Copy the highlighted text</li>
             <input type='text'>
             <li>Create a new browser bookmark</li>
             <li>Copy the highlighted text as the URL of the new bookmark</li>
           </ol>
-          <p>
-            When viewing the albums tab in your Facebook group, click the bookmark to collect the names of all the albums.
-          </p>
-          <p>
-            Any album with a &#9988; icon will be deleted. Click albums to toggle whether or not to keep them. Then click the Remove All button.
-          </p>
         </div>
         <div class='item'>
-          <p>
+          <p class='left'>
             Always be careful when adding scripts to your browser to run as bookmarks. The script will run as you, in the context of your current
             page. Make sure you know and trust the source of the script and are comfortable with the actions it will take. If in doubt, don't install it.
           </p>
-          <p>
+          <p class='left'>
             For reference here are direct links to
             <a href='albumkiller.js'>albumkiller.js</a>
             and
@@ -86,7 +118,7 @@
           Ryan Calhoun
         </div>
         <div class='info'>
-          2016/10/19 22:50:22
+          2016/10/19 23:55:27
         </div>
         <div class='links'>
           Find me on
