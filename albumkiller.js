@@ -80,7 +80,7 @@
   dialog.appendChild(list);
 
   list.style.marginTop = '10px';
-  list.style.height = 'calc(100% - 50px)';
+  list.style.height = 'calc(100% - 92px)';
   list.style.overflow = 'auto';
 
   var button = document.createElement('button');
