@@ -259,8 +259,8 @@
         }
 
         function closeWindow() {
-          var photos = win.document.querySelector('.fbStarGrid');
-          if(photos) {
+          var homePage = win.document.querySelector('#contentCol.homeFixedLayout');
+          if(!homePage) {
             setTimeout(closeWindow, 250);
           } else {
             remove(i + 1);
