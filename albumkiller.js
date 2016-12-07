@@ -215,6 +215,7 @@
 
     function remove(i) {
       var album = albums[i];
+      console.log(new Date(), "remove", i, album);
 
       if(! album) {
         if(win) {
@@ -231,11 +232,14 @@
           win = window.open(album.href, '_removal_helper_window');
         }
 
+        var redoClick;
         clickDeleteButton();
 
         function clickDeleteButton() {
           var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
+          console.log(new Date(), "click delete button", deleteButton);
           if(deleteButton) {
+            redoClick = setTimeout(clickDeleteButton, 1000);
             setTimeout(function() {
               deleteButton.click();
               confirmDelete();
@@ -247,7 +251,10 @@
 
         function confirmDelete() {
           var confirmButton = win.document.querySelector('form button[name=confirmed]');
+          console.log(new Date(), "confirm delete", confirmButton);
           if(confirmButton) {
+            clearTimeout(redoClick);
+            redoClick = setTimeout(confirmDelete, 1000);
             setTimeout(function() {
               confirmButton.click();
               closeWindow();
@@ -255,14 +262,15 @@
           } else {
             setTimeout(confirmDelete, 250);
           }
-
         }
 
         function closeWindow() {
           var homePage = win.document.querySelector('#contentCol.homeFixedLayout');
+          console.log(new Date(), "close window", homePage);
           if(!homePage) {
             setTimeout(closeWindow, 250);
           } else {
+            clearTimeout(redoClick);
             remove(i + 1);
           }
         }
