@@ -101,12 +101,25 @@
   moveToFirstPage();
 
   var currentPageAction;
+  var lastTimeout;
+
+  function wrapTimeout(fun, time) {
+    if(lastTimeout) {
+      clearTimeout(lastTimeout);
+      lastTimeout = undefined; 
+    } 
+
+    lastTimeout = setTimeout(function() {
+      clearTimeout(lastTimeout);
+      fun();
+    }, time);
+  }
 
   function waitForNextPage() {
     document.querySelector('#contentArea').removeEventListener('DOMSubtreeModified', waitForNextPage);
     var albums = document.querySelectorAll('a.photoTextTitle');
     if(albums.length == 0) {
-      setTimeout(waitForNextPage, 100);
+      wrapTimeout(waitForNextPage, 100);
     } else {
       currentPageAction();
     }
@@ -232,20 +245,18 @@
           win = window.open(album.href, '_removal_helper_window');
         }
 
-        var redoClick;
         clickDeleteButton();
 
         function clickDeleteButton() {
           var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
           console.log(new Date(), "click delete button", deleteButton);
           if(deleteButton) {
-            redoClick = setTimeout(clickDeleteButton, 1000);
-            setTimeout(function() {
+            wrapTimeout(function() {
               deleteButton.click();
               confirmDelete();
-            }, 100);
+            }, 500);
           } else {
-            setTimeout(clickDeleteButton, 250);
+            wrapTimeout(clickDeleteButton, 500);
           }
         }
 
@@ -253,14 +264,12 @@
           var confirmButton = win.document.querySelector('form button[name=confirmed]');
           console.log(new Date(), "confirm delete", confirmButton);
           if(confirmButton) {
-            clearTimeout(redoClick);
-            redoClick = setTimeout(confirmDelete, 1000);
-            setTimeout(function() {
+            wrapTimeout(function() {
               confirmButton.click();
               closeWindow();
-            }, 100);
+            }, 500);
           } else {
-            setTimeout(confirmDelete, 250);
+            wrapTimeout(confirmDelete, 500);
           }
         }
 
@@ -268,9 +277,8 @@
           var homePage = win.document.querySelector('#contentCol.homeFixedLayout');
           console.log(new Date(), "close window", homePage);
           if(!homePage) {
-            setTimeout(closeWindow, 250);
+            wrapTimeout(closeWindow, 500);
           } else {
-            clearTimeout(redoClick);
             remove(i + 1);
           }
         }
