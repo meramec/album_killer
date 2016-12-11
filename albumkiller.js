@@ -105,12 +105,16 @@
 
   function wrapTimeout(fun, time) {
     if(lastTimeout) {
+      console.log("clear previous timeout");
       clearTimeout(lastTimeout);
       lastTimeout = undefined; 
     } 
 
+    console.log("setting timeout", fun, time);
+
     lastTimeout = setTimeout(function() {
       clearTimeout(lastTimeout);
+      console.log("calling fun");
       fun();
     }, time);
   }
@@ -256,6 +260,7 @@
               confirmDelete();
             }, 500);
           } else {
+            console.log(new Date(), "didn't find delete button, setting timeout");
             wrapTimeout(clickDeleteButton, 500);
           }
         }
