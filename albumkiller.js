@@ -123,7 +123,12 @@
     document.querySelector('#contentArea').removeEventListener('DOMSubtreeModified', waitForNextPage);
     var albums = document.querySelectorAll('a.photoTextTitle');
     if(albums.length == 0) {
-      wrapTimeout(waitForNextPage, 100);
+      var noResults = document.querySelector('[role=alert]');
+      if(noResults && noResults.innerHTML == 'No Results') {
+        setButtonState();
+      } else {
+        wrapTimeout(waitForNextPage, 100);
+      }
     } else {
       currentPageAction();
     }
