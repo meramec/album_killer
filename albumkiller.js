@@ -113,7 +113,6 @@
     console.log("setting timeout", fun, time);
 
     lastTimeout = setTimeout(function() {
-      clearTimeout(lastTimeout);
       console.log("calling fun");
       fun();
     }, time);
@@ -254,7 +253,7 @@
           win = window.open(album.href, '_removal_helper_window');
         }
 
-        clickDeleteButton();
+        setTimeout(clickDeleteButton, 500);
 
         function clickDeleteButton() {
           var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
@@ -266,7 +265,7 @@
             }, 500);
           } else {
             console.log(new Date(), "didn't find delete button, setting timeout");
-            wrapTimeout(clickDeleteButton, 500);
+            wrapTimeout(clickDeleteButton, 1000);
           }
         }
 
@@ -277,7 +276,7 @@
             wrapTimeout(function() {
               confirmButton.click();
               closeWindow();
-            }, 500);
+            }, 1000);
           } else {
             wrapTimeout(confirmDelete, 500);
           }
@@ -287,7 +286,7 @@
           var homePage = win.document.querySelector('#contentCol.homeFixedLayout');
           console.log(new Date(), "close window", homePage);
           if(!homePage) {
-            wrapTimeout(closeWindow, 500);
+            wrapTimeout(closeWindow, 1000);
           } else {
             remove(i + 1);
           }
