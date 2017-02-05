@@ -209,6 +209,9 @@
     a.appendChild(name);
     name.appendChild(document.createTextNode(album.text));
 
+    album.icon = icon;
+    album.link = a;
+
     a.addEventListener('click', function() {
       if(album.remove) {
         album.remove = false;
@@ -226,6 +229,12 @@
     });
 
     return a;
+  }
+
+  function unselectAlbum(album) {
+    album.remove = false;
+    album.icon.style.opacity = '0';
+    album.link.style.color = '#aaa';
   }
 
   function removeAlbums() {
@@ -273,6 +282,7 @@
           var confirmButton = win.document.querySelector('form button[name=confirmed]');
           console.log(new Date(), "confirm delete", confirmButton);
           if(confirmButton) {
+            unselectAlbum(album);
             wrapTimeout(function() {
               confirmButton.click();
               closeWindow();
