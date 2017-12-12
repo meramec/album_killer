@@ -105,15 +105,11 @@
 
   function wrapTimeout(fun, time) {
     if(lastTimeout) {
-      console.log("clear previous timeout");
       clearTimeout(lastTimeout);
       lastTimeout = undefined; 
     } 
 
-    console.log("setting timeout", fun, time);
-
     lastTimeout = setTimeout(function() {
-      console.log("calling fun");
       fun();
     }, time);
   }
@@ -245,7 +241,6 @@
 
     function remove(i) {
       var album = albums[i];
-      console.log(new Date(), "remove", i, album);
 
       if(! album) {
         if(win) {
@@ -262,41 +257,49 @@
           win = window.open(album.href, '_removal_helper_window');
         }
 
-        setTimeout(clickDeleteButton, 5000);
+        wrapTimeout(waitForDeleteButton, 1000);
+
+        function waitForDeleteButton() {
+          var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
+
+          if(deleteButton) {
+            wrapTimeout(clickDeleteButton, 500);
+          } else {
+            var notExists = win.document.querySelector('.uiInterstitial');
+            if(notExists) {
+              remove(i + 1);
+            } else {
+              wrapTimeout(waitForDeleteButton, 500);
+            }
+          }
+        }
 
         function clickDeleteButton() {
           var deleteButton = win.document.querySelector('a[data-tooltip-content="Delete Album"]');
-          console.log(new Date(), "click delete button", deleteButton);
-          if(deleteButton) {
-            wrapTimeout(function() {
-              deleteButton.click();
-              confirmDelete();
-            }, 5000);
+          deleteButton.click();
+          wrapTimeout(waitForConfirm, 500);
+        }
+
+        function waitForConfirm() {
+          var confirmButton = win.document.querySelector('form button[name=confirmed]');
+          if(confirmButton) {
+            wrapTimeout(confirmDelete, 500);
           } else {
-            console.log(new Date(), "didn't find delete button, setting timeout");
-            wrapTimeout(clickDeleteButton, 1000);
+            wrapTimeout(waitForConfirm, 500);
           }
         }
 
         function confirmDelete() {
           var confirmButton = win.document.querySelector('form button[name=confirmed]');
-          console.log(new Date(), "confirm delete", confirmButton);
-          if(confirmButton) {
-            unselectAlbum(album);
-            wrapTimeout(function() {
-              confirmButton.click();
-              closeWindow();
-            }, 2000);
-          } else {
-            wrapTimeout(confirmDelete, 2000);
-          }
+          confirmButton.click();
+          unselectAlbum(album);
+          wrapTimeout(function() { closeWindow(); }, 1000);
         }
 
         function closeWindow() {
           var homePage = win.document.querySelector('#contentCol.homeFixedLayout');
-          console.log(new Date(), "close window", homePage);
           if(!homePage) {
-            wrapTimeout(closeWindow, 5000);
+            wrapTimeout(closeWindow, 1000);
           } else {
             remove(i + 1);
           }
